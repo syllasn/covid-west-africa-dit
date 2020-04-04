@@ -47,9 +47,7 @@ cloudpickle==1.2.2
 coincurve==13.0.0
 colorama==0.4.1
 
-conda-build==3.18.9
-conda-package-handling==1.6.0
-conda-verify==3.4.2
+
 contextlib2==0.6.0
 countryinfo==0.1.0
 cryptography==2.7
