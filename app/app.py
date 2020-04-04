@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib.colors as mcolors
 import plotly.graph_objects as go
+from plotly import graph_objs as go
 import plotly.express as px
 import plotly.io as pio
 pio.templates.default = "plotly_dark"
@@ -12,6 +13,9 @@ from folium import plugins
 import seaborn as sns
 import pandas as pd 
 import random
+from io import StringIO
+
+from io import BytesIO
 import math
 from scipy.stats import expon
 import time
@@ -24,57 +28,72 @@ import scipy.optimize as optim
 from matplotlib import pyplot
 from sklearn.metrics import mean_squared_error
 plt.style.use('seaborn')
-%matplotlib inline 
+# %matplotlib inline 
 from geopy.geocoders import Nominatim
 geolocator = Nominatim()
 from plotly.subplots import make_subplots
+import io
+import base64
+
+class Covid19:
+
+    def __init__(self):
+        pass
 
 
-# load and preparation data
-file_name = 'Covid19SN_datas.xlsx' 
-df = pd.read_excel(file_name, index_col=0)
-df.shape
-df = df.reset_index()
+    # load and preparation 
 
-date_c = df.groupby('date')['cas_positif','importes','contacts','communautaires'].sum().reset_index()
+    # file_name = 'E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx' 
+    def covid(self,file_name):
+        df = pd.read_excel(file_name, index_col=0)
+        df.shape
+        df = df.reset_index()
 
-fig = make_subplots(rows=1, cols=4, subplot_titles=("cas_positif", "importes", "contacts",'communautaires'))
+        date_c = df.groupby('date')['cas_positif','importes','contacts','communautaires'].sum().reset_index()
 
-trace1 = go.Scatter(
-                x=date_c['date'],
-                y=date_c['cas_positif'],
-                name="cas_positif",
-                line_color='orange',
-                mode='lines+markers',
-                opacity=0.8)
-trace2 = go.Scatter(
-                x=date_c['date'],
-                y=date_c['importes'],
-                name="importes",
-                line_color='red',
-                mode='lines+markers',
-                opacity=0.8)
+        plt = make_subplots(rows=1, cols=4, subplot_titles=("cas_positif", "importes", "contacts",'communautaires'))
 
-trace3 = go.Scatter(
-                x=date_c['date'],
-                y=date_c['contacts'],
-                name="contacts",
-                mode='lines+markers',
-                line_color='green',
-                opacity=0.8)
+        trace1 = go.Scatter(
+                        x=date_c['date'],
+                        y=date_c['cas_positif'],
+                        name="cas_positif",
+                        line_color='orange',
+                        mode='lines+markers',
+                        opacity=0.8)
+        trace2 = go.Scatter(
+                        x=date_c['date'],
+                        y=date_c['importes'],
+                        name="importes",
+                        line_color='red',
+                        mode='lines+markers',
+                        opacity=0.8)
 
-trace4 = go.Scatter(
-                x=date_c['date'],
-                y=date_c['communautaires'],
-                name="communautaires",
-                line_color='blue',
-                mode='lines+markers',
-                opacity=0.8)
+        trace3 = go.Scatter(
+                        x=date_c['date'],
+                        y=date_c['contacts'],
+                        name="contacts",
+                        mode='lines+markers',
+                        line_color='green',
+                        opacity=0.8)
 
-fig.append_trace(trace1, 1, 1)
-fig.append_trace(trace2, 1, 2)
-fig.append_trace(trace3, 1, 3)
-fig.append_trace(trace4, 1, 4)
-fig.update_layout(template="plotly_dark",title_text = '<b>Global West Africa  Spread of the Coronavirus Over Time </b>',
-                  font=dict(family="Arial, Balto, Courier New, Droid Sans",color='white'))
-fig.show()
+        trace4 = go.Scatter(
+                        x=date_c['date'],
+                        y=date_c['communautaires'],
+                        name="communautaires",
+                        line_color='blue',
+                        mode='lines+markers',
+                        opacity=0.8)
+
+        plt.append_trace(trace1, 1, 1)
+        plt.append_trace(trace2, 1, 2)
+        plt.append_trace(trace3, 1, 3)
+        plt.append_trace(trace4, 1, 4)
+        plt.update_layout(template="plotly_dark",title_text = '<b>Global West Africa  Spread of the Coronavirus Over Time </b>',
+                        font=dict(family="Arial, Balto, Courier New, Droid Sans",color='white'))
+        return plt
+     
+
+
+covid = Covid19()
+file_name = 'E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx'
+covid.covid(file_name)
