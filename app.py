@@ -46,7 +46,7 @@ class Covid19:
 
     # load and preparation 
 
-    # file_name = 'E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx' 
+    #file_name = 'E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx' 
     def covid(self,file_name):
         df = pd.read_excel(file_name, index_col=0)
         df.shape
@@ -102,6 +102,6 @@ class Covid19:
      
 
 
-covid = Covid19()
-file_name = 'E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx'
-covid.covid(file_name)
+# covid = Covid19()
+# file_name = 'E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx'
+# covid.covid(file_name)

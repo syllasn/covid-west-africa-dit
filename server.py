@@ -27,7 +27,7 @@ dataframe = Covid19()
 
 @app.route('/', methods=['GET'])
 def get_dashboard():
-    bar=dataframe.covid('E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx')
+    bar=dataframe.covid('Covid19SN_datas.xlsx')
     return render_template('index.html', plot=bar)
     # canvas = FigureCanvasAgg(fig)  
     # response= Response( mimetype='image/png') 
