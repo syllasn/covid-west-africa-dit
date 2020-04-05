@@ -24,7 +24,7 @@ CORS(app)
 dataframe = Covid19()
 
 
-@app.route('/api/dashboard/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_dashboard():
     bar=dataframe.covid('E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx')
     return render_template('index.html', plot=bar)
