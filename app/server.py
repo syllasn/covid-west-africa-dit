@@ -8,7 +8,7 @@ from io import BytesIO
 from matplotlib import pyplot as plt
 import plotly.graph_objects as go
 import datetime
-import StringIO
+# import StringIO
 import random
 
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -26,14 +26,20 @@ dataframe = Covid19()
 
 @app.route('/api/dashboard/', methods=['GET'])
 def get_dashboard():
-    fig=dataframe.covid('E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx')
-    fig.autofmt_xdate()
-    canvas=FigureCanvas(fig)
-    png_output = StringIO.StringIO()
-    canvas.print_png(png_output)
-    response=make_response(png_output.getvalue())
-    response.headers['Content-Type'] = 'image/png'
-    return response
+    bar=dataframe.covid('E:\Covid19\covid-west-africa-dit\Covid19SN_datas.xlsx')
+    return render_template('index.html', plot=bar)
+    # canvas = FigureCanvasAgg(fig)  
+    # response= Response( mimetype='image/png') 
+    # canvas.print_png(response)
+    
+
+    # respons = {
+
+    # } 
+    # response = HttpResponse(content_type='image/png')
+    # canvas.print_png(response)
+    # matplotlib.pyplot.close(f)   
+    # return response
     
     #return render_template("interface.html",  figure = fig)
 

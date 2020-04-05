@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 from plotly import graph_objs as go
 import plotly.express as px
 import plotly.io as pio
+import plotly
 pio.templates.default = "plotly_dark"
 from plotly.subplots import make_subplots
 import folium 
@@ -14,9 +15,11 @@ import seaborn as sns
 import pandas as pd 
 import random
 from io import StringIO
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 from io import BytesIO
 import math
+import json
 from scipy.stats import expon
 import time
 from sklearn.svm import SVR
@@ -90,7 +93,12 @@ class Covid19:
         plt.append_trace(trace4, 1, 4)
         plt.update_layout(template="plotly_dark",title_text = '<b>Global West Africa  Spread of the Coronavirus Over Time </b>',
                         font=dict(family="Arial, Balto, Courier New, Droid Sans",color='white'))
-        return plt
+       
+        graphJSON = json.dumps(plt, cls=plotly.utils.PlotlyJSONEncoder)
+        print(graphJSON)
+
+        return graphJSON
+        # return plt
      
 
 
