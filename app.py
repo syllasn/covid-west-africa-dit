@@ -52,27 +52,27 @@ class Covid19:
         df.shape
         df = df.reset_index()
 
-        date_c = df.groupby('date')['cas_positif','importes','contacts','communautaires'].sum().reset_index()
+        date_c = df.groupby('Date')['Confirmed_cases','Imported_cases','contacts','Communities_cases'].sum().reset_index()
 
-        plt = make_subplots(rows=1, cols=4, subplot_titles=("cas_positif", "importes", "contacts",'communautaires'))
+        plt = make_subplots(rows=1, cols=4, subplot_titles=("Confirmed_cases", "Imported_cases", "contacts",'Communities_cases'))
 
         trace1 = go.Scatter(
-                        x=date_c['date'],
-                        y=date_c['cas_positif'],
-                        name="cas_positif",
+                        x=date_c['Date'],
+                        y=date_c['Confirmed_cases'],
+                        name="Confirmed_cases",
                         line_color='orange',
                         mode='lines+markers',
                         opacity=0.8)
         trace2 = go.Scatter(
-                        x=date_c['date'],
-                        y=date_c['importes'],
-                        name="importes",
+                        x=date_c['Date'],
+                        y=date_c['Imported_cases'],
+                        name="Imported_cases",
                         line_color='red',
                         mode='lines+markers',
                         opacity=0.8)
 
         trace3 = go.Scatter(
-                        x=date_c['date'],
+                        x=date_c['Date'],
                         y=date_c['contacts'],
                         name="contacts",
                         mode='lines+markers',
@@ -80,9 +80,9 @@ class Covid19:
                         opacity=0.8)
 
         trace4 = go.Scatter(
-                        x=date_c['date'],
-                        y=date_c['communautaires'],
-                        name="communautaires",
+                        x=date_c['Date'],
+                        y=date_c['Communities_cases'],
+                        name="Communities_cases",
                         line_color='blue',
                         mode='lines+markers',
                         opacity=0.8)

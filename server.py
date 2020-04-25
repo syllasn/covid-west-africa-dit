@@ -25,10 +25,13 @@ CORS(app)
 dataframe = Covid19()
 
 
-@app.route('/', methods=['GET'])
+@app.route('/graph', methods=['GET'])
 def get_dashboard():
     bar=dataframe.covid('Covid19SN_datas.xlsx')
-    return render_template('index.html', plot=bar)
+    response = {
+        'data': bar
+    }
+    return jsonify(response)  ,200
     # canvas = FigureCanvasAgg(fig)  
     # response= Response( mimetype='image/png') 
     # canvas.print_png(response)
