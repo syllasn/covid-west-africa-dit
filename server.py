@@ -105,7 +105,9 @@ def get_dashboard():
     response = {
         'data': data
     }
-    return jsonify(response)  , 200
+    return jsonify(response) , 200
+
+    
     # canvas = FigureCanvasAgg(fig)  
     # response= Response( mimetype='image/png') 
     # canvas.print_png(response)
