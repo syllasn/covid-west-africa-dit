@@ -38,17 +38,19 @@ def get_dashboard():
     df = df.reset_index()
     values = request.json
     print(values)
+    print(values['option']['confirmes'])
     if not values :
         response = {
             'message':'no data found' 
-
         }
+        print(response['message'])
         return jsonify(response)  ,400
     require_values = ['date_deb','date_fin','option']
     if not all( field in values for field in require_values):
         response = {
             'message': 'Required data is missing'
         }
+        print(response['message'])
         return jsonify(response)  ,400
     #url = values['date_deb','date_fin','option']
     date_deb = values['date_deb']
@@ -56,49 +58,66 @@ def get_dashboard():
     date_fin = values['date_fin']
     print(date_fin)
     option = values['option']
+    print(option['confirmes'])
      #option_1='Confirme', option_2='Contact', option_3='Importe', option_4='Communautaire',option_5='Recovered', option_6='Dead'
-    if(option=='Confirme'):
-        option_1 = option
-        option_2='a'
-        option_3='b'
-        option_4 ='cc '
-        option_5='dd'
-        option_6='dd'
-    elif(otpion=='Contact'):
-        option_2=option
-        option_1='a'
-        option_3='b'
-        option_4 ='cc '
-        option_5='dd'
-        option_6='dd'
-    elif(option=='Importe'):
-        option_3=option
-        option_2='a'
-        option_1='b'
-        option_4 ='cc '
-        option_5='dd'
-        option_6='dd'
-    elif(option=='Communautaire'):
-        option_4=option
-        option_2='a'
-        option_3='b'
-        option_1 ='cc '
-        option_5='dd'
-        option_6='dd'
-    elif(option=='Recovered'):
-        option_5=option
-        option_2='a'
-        option_3='b'
-        option_4 ='cc '
-        option_1='dd'
-        option_6='dd'
-    elif(option=='Dead'):
-        option_6=option
-        option_2='a'
-        option_3='b'
-        option_4 ='cc '
-        option_5='dd'
-        option_1='dd'
+    #option_1='confirmesvide'
+    if(option['confirmes']==True):
+        option_1 = 'Confirme'
+        print(option_1)
+    elif(option['confirmes']!=True):
+        option_1='confirmesvide'
+        # option_2='a'
+        # option_3='b'
+        # option_4 ='cc '
+        # option_5='dd'
+        # option_6='dd'
+    if(option['contact']==True):
+        option_2='Contact'
+    elif(option['contact']==''):
+
+        option_2='contactvide'
+
+        # option_1='a'
+        # option_3='b'
+        # option_4 ='cc '
+        # option_5='dd'
+        # option_6='dd'
+    if(option['importes']==True):
+        option_3='Importe'
+    elif(option['importes']==''):
+        option_3='importesvide'
+        # option_2='a'
+        # option_1='b'
+        # option_4 ='cc '
+        # option_5='dd'
+        # option_6='dd'
+    if(option['communautaire']==True):
+        option_4='Communautaire'
+    elif(option['communautaire']==''):
+        option_4='Communautairevide'
+        # option_2='a'
+        # option_3='b'
+        # option_1 ='cc '
+        # option_5='dd'
+        # option_6='dd'
+    if(option['recovered']==True):
+        option_5='Recovered'
+    elif(option['recovered']==''):
+        option_5='Recoveredvide'
+        # option_2='a'
+        # option_3='b'
+        # option_4 ='cc '
+        # option_1='dd'
+        # option_6='dd'
+    if(option['dead']==True):
+        option_6='Dead'
+    elif(option['dead']==''):
+        option_6='deadvide'
+        # option_2='a'
+        # option_3='b'
+        # option_4 ='cc '
+        # option_5='dd'
+        # option_1='dd'
     print(option)
     data = graph.graphe_sn('Senegal',df,date_deb =date_deb , date_fin=date_fin ,option_1=option_1,option_2=option_2,option_3=option_3,option_4=option_4,option_5=option_5,option_6=option_6)
     print(data)

@@ -134,11 +134,11 @@ class Graph:
                     line_color='orange',
                     mode='lines+markers',
                     opacity=0.8)
-            fig.append_trace(trace4, 1, 1)
+            fig.append_trace(trace6, 1, 1)
 
         
         
-        fig.append_trace(trace1, 1, 1)
+        #fig.append_trace(trace1, 1, 1)
         # fig.append_trace(trace2, 1, 1)
         # fig.append_trace(trace3, 1, 1)
         # fig.append_trace(trace4, 1, 1)
